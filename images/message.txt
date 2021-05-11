@@ -1,0 +1,786 @@
+ERROR in ./node_modules/terser-webpack-plugin/dist/index.js 8:35-50
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/terser-webpack-plugin/dist'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/terser-webpack-plugin/dist/cjs.js 3:15-33
+ @ ./node_modules/webpack/lib/config/defaults.js 930:25-57
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/terser-webpack-plugin/dist/index.js 10:33-46
+Module not found: Error: Can't resolve 'os' in '/home/dan/Projects/todo/node_modules/terser-webpack-plugin/dist'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "os": require.resolve("os-browserify/browser") }'
+	- install 'os-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "os": false }
+ @ ./node_modules/terser-webpack-plugin/dist/cjs.js 3:15-33
+ @ ./node_modules/webpack/lib/config/defaults.js 930:25-57
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/terser/node_modules/source-map/lib/read-wasm.js 20:13-26
+Module not found: Error: Can't resolve 'fs' in '/home/dan/Projects/todo/node_modules/terser/node_modules/source-map/lib'
+ @ ./node_modules/terser/node_modules/source-map/lib/source-map-consumer.js 12:17-44
+ @ ./node_modules/terser/node_modules/source-map/source-map.js 7:0-82
+ @ ./node_modules/terser/dist/bundle.min.js 2:80-101
+ @ ./node_modules/terser-webpack-plugin/dist/minify.js 5:4-21
+ @ ./node_modules/terser-webpack-plugin/dist/index.js 26:14-33 269:32-59
+ @ ./node_modules/terser-webpack-plugin/dist/cjs.js 3:15-33
+ @ ./node_modules/webpack/lib/config/defaults.js 930:25-57
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/terser/node_modules/source-map/lib/read-wasm.js 21:15-30
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/terser/node_modules/source-map/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/terser/node_modules/source-map/lib/source-map-consumer.js 12:17-44
+ @ ./node_modules/terser/node_modules/source-map/source-map.js 7:0-82
+ @ ./node_modules/terser/dist/bundle.min.js 2:80-101
+ @ ./node_modules/terser-webpack-plugin/dist/minify.js 5:4-21
+ @ ./node_modules/terser-webpack-plugin/dist/index.js 26:14-33 269:32-59
+ @ ./node_modules/terser-webpack-plugin/dist/cjs.js 3:15-33
+ @ ./node_modules/webpack/lib/config/defaults.js 930:25-57
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/DirectoryWatcher.js 9:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/watchpack/lib/watchpack.js 280:31-281:30
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/DirectoryWatcher.js 17:15-37
+Module not found: Error: Can't resolve 'os' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "os": require.resolve("os-browserify/browser") }'
+	- install 'os-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "os": false }
+ @ ./node_modules/watchpack/lib/watchpack.js 280:31-281:30
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/LinkResolver.js 7:11-24
+Module not found: Error: Can't resolve 'fs' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+ @ ./node_modules/watchpack/lib/watchpack.js 8:21-46
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/LinkResolver.js 8:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/watchpack/lib/watchpack.js 8:21-46
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/getWatcherManager.js 7:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/watchpack/lib/watchpack.js 7:26-56
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/reducePlan.js 7:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/watchpack/lib/watchEventSource.js 10:19-42
+ @ ./node_modules/watchpack/lib/watchpack.js 11:25-54
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/watchEventSource.js 7:11-24
+Module not found: Error: Can't resolve 'fs' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+ @ ./node_modules/watchpack/lib/watchpack.js 11:25-54
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/watchEventSource.js 8:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/watchpack/lib/watchpack.js 11:25-54
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/watchpack/lib/watchEventSource.js 12:15-37
+Module not found: Error: Can't resolve 'os' in '/home/dan/Projects/todo/node_modules/watchpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "os": require.resolve("os-browserify/browser") }'
+	- install 'os-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "os": false }
+ @ ./node_modules/watchpack/lib/watchpack.js 11:25-54
+ @ ./node_modules/webpack/lib/config/defaults.js 321:4-32 329:4-32 340:4-32 347:4-32
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/hot/lazy-compilation-node.js 12:15-38
+Module not found: Error: Can't resolve 'http' in '/home/dan/Projects/todo/node_modules/webpack/hot'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "http": require.resolve("stream-http") }'
+	- install 'stream-http'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "http": false }
+ @ ./node_modules/webpack/hot/ sync ^\.\/lazy\-compilation\-.*\.js$ ./lazy-compilation-node.js
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 267:5-271:6
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/ChunkGraph.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/index.js 136:9-32
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/ChunkGroup.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/Compilation.js 23:19-42
+ @ ./node_modules/webpack/lib/index.js 142:9-33
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/ChunkTemplate.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/Compilation.js 25:22-48
+ @ ./node_modules/webpack/lib/index.js 142:9-33
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/Compilation.js 18:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/index.js 142:9-33
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/ExternalModuleFactoryPlugin.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/DllReferencePlugin.js 10:36-76
+ @ ./node_modules/webpack/lib/index.js 169:9-40
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/MainTemplate.js 9:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/Compilation.js 40:21-46
+ @ ./node_modules/webpack/lib/index.js 142:9-33
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/Module.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/index.js 231:9-28
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/ModuleGraph.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/index.js 237:9-33
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/ModuleTemplate.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/Compilation.js 49:23-50
+ @ ./node_modules/webpack/lib/index.js 142:9-33
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/NormalModule.js 10:20-42
+Module not found: Error: Can't resolve 'querystring' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "querystring": require.resolve("querystring-es3") }'
+	- install 'querystring-es3'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "querystring": false }
+ @ ./node_modules/webpack/lib/index.js 246:9-34
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/TemplatedPathPlugin.js 8:30-45
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 27:28-60
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/TemplatedPathPlugin.js 9:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 27:28-60
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/WebpackError.js 8:16-46
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/index.js 295:9-34
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/asset/AssetGenerator.js 9:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/webpack/lib/asset'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/webpack/lib/asset/AssetModulesPlugin.js 57:40-67
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 10:27-64
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/cli.js 8:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/webpack/lib/index.js 118:9-25
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/config/browserslistTargetHandler.js 9:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/webpack/lib/config'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/webpack/lib/config/target.js 8:34-72
+ @ ./node_modules/webpack/lib/config/defaults.js 16:4-23
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/config/defaults.js 8:11-24
+Module not found: Error: Can't resolve 'fs' in '/home/dan/Projects/todo/node_modules/webpack/lib/config'
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/config/defaults.js 9:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/webpack/lib/config'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/webpack/lib/index.js 326:10-66
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/config/normalization.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib/config'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/index.js 323:10-71
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/dependencies/ImportMetaPlugin.js 8:26-40
+Module not found: Error: Can't resolve 'url' in '/home/dan/Projects/todo/node_modules/webpack/lib/dependencies'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "url": require.resolve("url/") }'
+	- install 'url'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "url": false }
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 38:25-67
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/dependencies/WorkerPlugin.js 8:26-40
+Module not found: Error: Can't resolve 'url' in '/home/dan/Projects/todo/node_modules/webpack/lib/dependencies'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "url": require.resolve("url/") }'
+	- install 'url'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "url": false }
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 46:21-59
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/hmr/lazyCompilationBackend.js 8:13-28
+Module not found: Error: Can't resolve 'http' in '/home/dan/Projects/todo/node_modules/webpack/lib/hmr'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "http": require.resolve("stream-http") }'
+	- install 'stream-http'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "http": false }
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 264:5-44
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/index.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/javascript/JavascriptGenerator.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib/javascript'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/javascript/JavascriptModulesPlugin.js 27:28-60
+ @ ./node_modules/webpack/lib/index.js 209:9-56 377:10-57
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/javascript/JavascriptModulesPlugin.js 9:11-24
+Module not found: Error: Can't resolve 'vm' in '/home/dan/Projects/todo/node_modules/webpack/lib/javascript'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "vm": require.resolve("vm-browserify") }'
+	- install 'vm-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "vm": false }
+ @ ./node_modules/webpack/lib/index.js 209:9-56 377:10-57
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/javascript/JavascriptParser.js 10:11-24
+Module not found: Error: Can't resolve 'vm' in '/home/dan/Projects/todo/node_modules/webpack/lib/javascript'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "vm": require.resolve("vm-browserify") }'
+	- install 'vm-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "vm": false }
+ @ ./node_modules/webpack/lib/index.js 380:10-50
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/node/nodeConsole.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib/node'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/node/NodeEnvironmentPlugin.js 12:20-44
+ @ ./node_modules/webpack/lib/index.js 456:10-49
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/rules/UseEffectRulePlugin.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib/rules'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/NormalModuleFactory.js 23:28-66
+ @ ./node_modules/webpack/lib/Compiler.js 25:28-60
+ @ ./node_modules/webpack/lib/index.js 145:9-30
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/schemes/FileUriPlugin.js 8:31-45
+Module not found: Error: Can't resolve 'url' in '/home/dan/Projects/todo/node_modules/webpack/lib/schemes'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "url": require.resolve("url/") }'
+	- install 'url'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "url": false }
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 32:22-56
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/schemes/HttpUriPlugin.js 8:16-30
+Module not found: Error: Can't resolve 'url' in '/home/dan/Projects/todo/node_modules/webpack/lib/schemes'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "url": require.resolve("url/") }'
+	- install 'url'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "url": false }
+ @ ./node_modules/webpack/lib/index.js 554:11-45
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/schemes/HttpUriPlugin.js 35:13-32
+Module not found: Error: Can't resolve 'http' in '/home/dan/Projects/todo/node_modules/webpack/lib/schemes'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "http": require.resolve("stream-http") }'
+	- install 'stream-http'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "http": false }
+ @ ./node_modules/webpack/lib/index.js 554:11-45
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/schemes/HttpsUriPlugin.js 8:16-30
+Module not found: Error: Can't resolve 'url' in '/home/dan/Projects/todo/node_modules/webpack/lib/schemes'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "url": require.resolve("url/") }'
+	- install 'url'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "url": false }
+ @ ./node_modules/webpack/lib/index.js 557:11-46
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/schemes/HttpsUriPlugin.js 35:13-33
+Module not found: Error: Can't resolve 'https' in '/home/dan/Projects/todo/node_modules/webpack/lib/schemes'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "https": require.resolve("https-browserify") }'
+	- install 'https-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "https": false }
+ @ ./node_modules/webpack/lib/index.js 557:11-46
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/serialization/FileMiddleware.js 7:22-39
+Module not found: Error: Can't resolve 'buffer' in '/home/dan/Projects/todo/node_modules/webpack/lib/serialization'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "buffer": require.resolve("buffer/") }'
+	- install 'buffer'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "buffer": false }
+ @ ./node_modules/webpack/lib/util/serialization.js 8:23-65
+ @ ./node_modules/webpack/lib/index.js 537:10-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/stats/DefaultStatsFactoryPlugin.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib/stats'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/WebpackOptionsApply.js 51:34-78
+ @ ./node_modules/webpack/lib/index.js 298:9-41
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/util/createHash.js 142:38-55
+Module not found: Error: Can't resolve 'crypto' in '/home/dan/Projects/todo/node_modules/webpack/lib/util'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "crypto": require.resolve("crypto-browserify") }'
+	- install 'crypto-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "crypto": false }
+ @ ./node_modules/webpack/lib/index.js 531:10-38
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/util/deprecation.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib/util'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/Chunk.js 18:43-72
+ @ ./node_modules/webpack/lib/index.js 133:9-27
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/util/fs.js 8:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/webpack/lib/util'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/webpack/lib/ContextReplacementPlugin.js 9:17-37
+ @ ./node_modules/webpack/lib/index.js 154:9-46
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/util/identifier.js 7:13-28
+Module not found: Error: Can't resolve 'path' in '/home/dan/Projects/todo/node_modules/webpack/lib/util'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "path": require.resolve("path-browserify") }'
+	- install 'path-browserify'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "path": false }
+ @ ./node_modules/webpack/lib/DllReferencePlugin.js 14:26-72
+ @ ./node_modules/webpack/lib/index.js 169:9-40
+ @ ./src/index.js 3:0-36
+
+ERROR in ./node_modules/webpack/lib/webpack.js 8:13-28
+Module not found: Error: Can't resolve 'util' in '/home/dan/Projects/todo/node_modules/webpack/lib'
+
+BREAKING CHANGE: webpack < 5 used to include polyfills for node.js core modules by default.
+This is no longer the case. Verify if you need this module and configure a polyfill for it.
+
+If you want to include a polyfill, you need to:
+	- add a fallback 'resolve.fallback: { "util": require.resolve("util/") }'
+	- install 'util'
+If you don't want to include a polyfill, you can use an empty module like this:
+	resolve.fallback: { "util": false }
+ @ ./node_modules/webpack/lib/index.js 93:30-50 96:9-29
+ @ ./src/index.js 3:0-36
+
+79 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.
+
+webpack 5.36.0 compiled with 79 errors and 11 warnings in 29493 ms
