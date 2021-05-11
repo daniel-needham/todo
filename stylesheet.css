@@ -35,7 +35,7 @@ header {
 
 
 #content{
-    height: 100%;
+    height: auto;
     width: 80%;
     margin: 0 auto; /* Center the DIV horizontally */
     padding: 20px;
@@ -115,6 +115,13 @@ nav li {
 }
 
 #title {
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none;
+    cursor:pointer;
     
 }
 
@@ -128,6 +135,15 @@ nav li {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    min-height: 300px;
+    min-width: 300px;
+    max-width: 404px;
+    max-height: 352px;
+    height: 100%;
+    width: 100%;
+    background-color: #f5f5dc;
+    margin: 5px;
+    overflow: hidden;
     
 }
 
@@ -160,11 +176,17 @@ nav li {
     min-height: 300px;
     min-width: 300px;
     max-width: 404px;
-    max-height: 404px;
+    max-height: 352px;
     height: 100%;
     width: 100%;
     background-color: #f5f5dc;
     margin: 5px;
+    overflow: hidden;
+}
+
+.project #delBTN {
+    width: 20px;
+    height: 20px;
 }
 
 .projectView {
@@ -195,6 +217,10 @@ nav li {
     grid-area: 1/1/2/1;
     justify-self: flex-end;
     margin: 15px;
+    background: url("/images/closeBTN.png") no-repeat top left;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
 }
 
 .projectView #newBTN {
@@ -204,9 +230,31 @@ nav li {
     justify-self: flex-end;
     margin-right: 50px;
     margin-top: 15px;
+    background: url("/images/addBTN.png") no-repeat top left;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    background-size: 28px 28px;
 }
+
+.projectView #delBTN {
+    width: 30px;
+    height: 30px;
+    grid-area: 1/1/2/1;
+    justify-self: flex-end;
+    margin-right: 85px;
+    margin-top: 15px;
+    background: url("/images/delBTN.png") no-repeat top left;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    background-size: 27px 27px;
+}
+
 
 .projectView h2 {
     grid-area: 1/1/2/1;
+    margin: 15px;
+    width: fit-content;
 }
 
