@@ -144,6 +144,7 @@ nav li {
     background-color: #f5f5dc;
     margin: 5px;
     overflow: hidden;
+    cursor: pointer;
     
 }
 
@@ -167,7 +168,12 @@ nav li {
     padding-top: 20px;
     text-align: center;
     color: #666666;
-    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     
     
 }
@@ -184,9 +190,19 @@ nav li {
     overflow: hidden;
 }
 
+.project h2 {
+    cursor: pointer;
+    
+}
+
 .project #delBTN {
     width: 20px;
     height: 20px;
+    background: url("/images/delBTN.png") no-repeat top left;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    background-size: 15px 16px;
 }
 
 .projectView {
@@ -248,7 +264,7 @@ nav li {
     background-size: contain;
     border: none;
     cursor: pointer;
-    background-size: 27px 27px;
+    background-size: 26px 27px;
 }
 
 

@@ -8,30 +8,6 @@ let recentProjectUUID = "";
 const today = new Date();
 const tomorrow = addDays(today, 1);
 
-//json help
-(function(){
-    // Convert array to object
-    var convArrToObj = function(array){
-        var thisEleObj = new Object();
-        if(typeof array == "object"){
-            for(var i in array){
-                var thisEle = convArrToObj(array[i]);
-                thisEleObj[i] = thisEle;
-            }
-        }else {
-            thisEleObj = array;
-        }
-        return thisEleObj;
-    };
-    var oldJSONStringify = JSON.stringify;
-    JSON.stringify = function(input){
-        if(oldJSONStringify(input) == '[]')
-            return oldJSONStringify(convArrToObj(input));
-        else
-            return oldJSONStringify(input);
-    };
-})();
-
 class Project {
     constructor(name) {
         this.name = name;
@@ -47,24 +23,24 @@ class Project {
         this.storeId();
     }
 
-    createTask(desc, due) {
-        let task = new Task(desc, due);
-        let array = this.tasks;
-        array.push(task);
-        data.save();
-    }
+    // createTask(desc, due) {
+    //     let task = new Task(desc, due);
+    //     let array = this.tasks;
+    //     array.push(task);
+    //     data.save();
+    // }
 
-    deleteTask(taskUUID) {
-        let index = this.tasks.findIndex(k => k.id === taskUUID);
-        if (index === -1) alert("task not found")
-        this.tasks.splice(index, 1);
+    // deleteTask(taskUUID) {
+    //     let index = this.tasks.findIndex(k => k.id === taskUUID);
+    //     if (index === -1) alert("task not found")
+    //     this.tasks.splice(index, 1);
 
-    }
+    // }
 
-    tasksNum() {
-        let array = this.tasks;
-        return array.length
-    }
+    // tasksNum() {
+    //     let array = this.tasks;
+    //     return array.length
+    // }
 
 }
 
@@ -89,6 +65,7 @@ const projects = (() => {
 
     const setProjectArr = (arr) => {
         projectArr = arr;
+        data.save()
     }
 
     const create = (name) => {
@@ -108,6 +85,15 @@ const projects = (() => {
         projectArr.splice(index, 1);
     }
 
+    const createTask = (projectUUID, desc, due) => {
+        let project = projectArr.find(obj => obj.id === projectUUID); //find project
+        let task = new Task(desc, due);
+        let array = project.tasks;
+        array.push(task);
+        data.save();
+    }
+
+    
 
     return {
         getProjectArr,
@@ -115,6 +101,7 @@ const projects = (() => {
         find,
         del,
         setProjectArr,
+        createTask,
     }
 })();
 
@@ -180,22 +167,25 @@ const dom = (() => {
     const createNote = (project) => {
         let notepad = document.createElement("div");
         notepad.setAttribute("class", "project");
-        let delBTN = document.createElement("button");
+        let delBTN = document.createElement("button");  
         delBTN.setAttribute("id", "delBTN");
         notepad.appendChild(delBTN);
+        let title = document.createElement("h2"); //create title so i can add uuid to id
         for (let key in project) {
 
-            if (key === "id") {
-                notepad.setAttribute("id", project[key]);
-                continue;
-            }
             if (key === "name") {
-                let title = document.createElement("h2");
+                
                 title.textContent = `${project[key]}`;
                 title.setAttribute("class", "title");
                 notepad.appendChild(title);
                 continue;
             }
+            if (key === "id") {
+                notepad.setAttribute("id", project[key]);
+                title.setAttribute("id", project[key]);
+                continue;
+            }
+            
             if (key === "tasks") {
                 let arr = project[key];
                 arr.forEach(taskObj => {
@@ -249,24 +239,29 @@ const dom = (() => {
     const enterTask = () => {
         console.log("project enter fired");
         let project = document.getElementById(recentProjectUUID);
+        const holder = document.createElement("div");
 
-        let desc = document.createElement("input");
+        const desc = document.createElement("input");
         desc.setAttribute("type", "text");
         desc.setAttribute("id", "desc");
         desc.setAttribute("class", "desc");
-        let due = document.createElement("input");
+        const due = document.createElement("input");
         due.setAttribute("type", "date");
         due.setAttribute("id", "due");
         due.setAttribute("class", "due");
         let tmrw = format(tomorrow, "yyyy-mm-dd");
         due.setAttribute("value", tmrw);
 
-        let enterBTN = document.createElement("button");
+        const enterBTN = document.createElement("button");
         enterBTN.setAttribute("id", "enterBTN");
 
-        project.appendChild(desc);
-        project.appendChild(due);
-        project.appendChild(enterBTN);
+        holder.appendChild(desc);
+        holder.appendChild(due);
+        holder.appendChild(enterBTN);
+
+        let firstChild = project.firstChild;
+        firstChild.before(holder);
+       
 
     }
 
@@ -296,22 +291,14 @@ const listener = (() => {
 
     const maincontent = () => {
         content.addEventListener("click", (e) => {
-            //
-
-
-
-            //back to here tmrw - make just the header open the note ??? css hovertoo
-            console.log(e.target.id);
-            console.log(e.target.parentNode.id)
-
-            //
+            
             if (e.target.id === "plus" || e.target.id === "addProject") {
                 console.log(e.target.id);
                 dom.enterProject();
                 listener.enterProject();
             }
 
-            if (e.target.className === "project" ) { //|| e.target.parentNode.parentNode.className === "project"  
+            if (e.target.className === "project" || e.target.className === "title" ) { //|| e.target.parentNode.parentNode.className === "project"  
                 console.log(e.target.id);
                 console.log(e.target.parentNode.id);
                 dom.loadProjectView(e.target.id);
@@ -329,6 +316,15 @@ const listener = (() => {
                 dom.del();
                 dom.loadAddProject();
                 dom.loadHome();
+                canAddTask = true;
+            }
+            if (e.target.id === "reset") {
+                console.log("reset");
+                projects.setProjectArr([]);   
+                dom.del();
+                dom.loadAddProject();
+                dom.loadHome();
+                canAddTask = true;
             }
         })
 
@@ -351,22 +347,25 @@ const listener = (() => {
 
     const projectView = () => {
         content.addEventListener("click", (e) => {
-            if (e.target.id === "newBTN" && canAddTask) {
+            if (e.target.id === "newBTN" && canAddTask) { //opens input to open task
                 dom.enterTask();
                 canAddTask = false;
             }
 
-            if (e.target.id === "enterBTN") {
+            if (e.target.id === "enterBTN") {               //creates new task on submit btn
                 console.log("submit new task fired");
-                let descInput = document.getElementById("desc").value;
-                let dueInput = document.getElementById("due").value;
+                let descInput = (document.getElementById("desc")).value;
+                let dueInput = (document.getElementById("due")).value;
+                console.log(dueInput);
                 //only if both have value will it submit
                 if (descInput && dueInput) {
                     console.log("will submit  new task")
-                    let thisProj = projects.find(recentProjectUUID);
-                    thisProj.createTask(descInput, dueInput);
+                    projects.createTask(recentProjectUUID, descInput, dueInput);
                     dom.loadProjectView(recentProjectUUID);
                     canAddTask = true;
+
+                    //test
+                    console.log(projects.find(recentProjectUUID));
 
 
                 } else {
@@ -374,8 +373,24 @@ const listener = (() => {
                     // .setAttribute("class", "highlight");
                     
                 }
-                
             }
+
+            //delete button
+            if (e.target.id === "delBTN") {
+                console.log("project view delete button fired")
+
+            }
+            
+            //close button
+            if (e.target.id === "closeBTN") {
+                console.log("close project button fired");
+                dom.del();
+                dom.loadAddProject();
+                dom.loadHome();
+                canAddTask = true;
+            };
+
+            
         })
     }
 
@@ -396,19 +411,19 @@ const listener = (() => {
 const data = (() => {
 
     const save = () => {
-        // let projectArr = projects.getProjectArr();
-        // if (typeof (Storage) !== "undefined") {
-        //     window.localStorage.setItem("projectArr", JSON.stringify(projectArr))
-        // } else {
-        //     alert("Local storage is not supported - changes will not be saved!")
-        // }
+        let projectArr = projects.getProjectArr();
+        if (typeof (Storage) !== "undefined") {
+            window.localStorage.setItem("projectArr", JSON.stringify(projectArr))
+        } else {
+            alert("Local storage is not supported - changes will not be saved!")
+        }
     }
 
     const load = () => {
-        // if (JSON.parse(window.localStorage.getItem("projectArr"))) {
-        //     let arr = JSON.parse(window.localStorage.getItem("projectArr"));
-        //     projects.setProjectArr(arr);
-        // }
+        if (JSON.parse(window.localStorage.getItem("projectArr"))) {
+            let arr = JSON.parse(window.localStorage.getItem("projectArr"));
+            projects.setProjectArr(arr);
+        }
     }
 
     return {
@@ -430,10 +445,7 @@ const data = (() => {
 })();
 
 function createDummys() {
-    projects.create("website");
- 
-    projects.create("book");
-    projects.create("study");
+    
 }
 
 
