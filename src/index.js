@@ -1,4 +1,4 @@
-import { addDays, isToday, format } from "date-fns";
+import { addDays, isToday, format, parseISO, } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 
 const content = document.getElementById("content");
@@ -7,6 +7,9 @@ let recentProjectUUID = "";
 
 const today = new Date();
 const tomorrow = addDays(today, 1);
+console.log(tomorrow);
+let tmrw = format(tomorrow, "yyyy-MM-dd");
+console.log(tmrw);
 
 class Project {
     constructor(name) {
@@ -93,7 +96,30 @@ const projects = (() => {
         data.save();
     }
 
-    
+
+    const findTask = (projectUUID, taskUUID) => {
+        let project = projectArr.find(obj => obj.id === projectUUID);
+        let tasksArr = project.tasks;
+        let task = tasksArr.find(obj => obj.id === taskUUID);
+        return task;
+
+    }
+    const toggleCompTask = (projectUUID, taskUUID) => {
+        let task = findTask(projectUUID, taskUUID);
+        task.complete = task.complete ? task.complete = false : task.complete = true;  
+        console.log(task);
+        data.save();
+    }
+
+    const snooze = (projectUUID, taskUUID) => {
+        let task = findTask(projectUUID, taskUUID);
+        task.due = addDays(parseISO(task.due), 1);
+        console.log(task.due);
+        data.save();
+
+    }
+
+
 
     return {
         getProjectArr,
@@ -102,6 +128,8 @@ const projects = (() => {
         del,
         setProjectArr,
         createTask,
+        toggleCompTask,
+        snooze,
     }
 })();
 
@@ -143,7 +171,8 @@ const dom = (() => {
             }
             if (key === "due") {
                 let date = document.createElement("p");
-                date.textContent = `${taskObj[key]}`;
+                let unformattedDate = parseISO(taskObj[key]);
+                date.textContent = `${format(unformattedDate, "dd/MM/yyyy")}`;
                 date.setAttribute("class", "due");
                 task.appendChild(date);
                 continue;
@@ -159,6 +188,7 @@ const dom = (() => {
                 task.appendChild(complete);
                 continue;
             }
+        
         }
         return task;
     }
@@ -167,14 +197,13 @@ const dom = (() => {
     const createNote = (project) => {
         let notepad = document.createElement("div");
         notepad.setAttribute("class", "project");
-        let delBTN = document.createElement("button");  
-        delBTN.setAttribute("id", "delBTN");
+        let delBTN = document.createElement("button");
+        delBTN.setAttribute("class", "delBTN");
         notepad.appendChild(delBTN);
         let title = document.createElement("h2"); //create title so i can add uuid to id
         for (let key in project) {
 
             if (key === "name") {
-                
                 title.textContent = `${project[key]}`;
                 title.setAttribute("class", "title");
                 notepad.appendChild(title);
@@ -183,9 +212,10 @@ const dom = (() => {
             if (key === "id") {
                 notepad.setAttribute("id", project[key]);
                 title.setAttribute("id", project[key]);
+                delBTN.setAttribute("id", project[key]);
                 continue;
             }
-            
+
             if (key === "tasks") {
                 let arr = project[key];
                 arr.forEach(taskObj => {
@@ -225,12 +255,9 @@ const dom = (() => {
         let closeBTN = document.createElement("button");
         closeBTN.setAttribute("id", "closeBTN");
         projectView.appendChild(closeBTN);
-        
+
         //pushes projectUUID to a var so tasks can be added
         recentProjectUUID = projectUUID;
-
-        //triggers event listener for this view
-        listener.projectView();
 
 
     }
@@ -249,7 +276,7 @@ const dom = (() => {
         due.setAttribute("type", "date");
         due.setAttribute("id", "due");
         due.setAttribute("class", "due");
-        let tmrw = format(tomorrow, "yyyy-mm-dd");
+        
         due.setAttribute("value", tmrw);
 
         const enterBTN = document.createElement("button");
@@ -261,7 +288,7 @@ const dom = (() => {
 
         let firstChild = project.firstChild;
         firstChild.before(holder);
-       
+
 
     }
 
@@ -273,6 +300,12 @@ const dom = (() => {
         content.appendChild(newProjectNote);
     }
 
+    const refreshHome = () => {
+        del();
+        loadAddProject();
+        loadHome();
+    }
+
     return {
         del,
         loadProjectView,
@@ -282,6 +315,7 @@ const dom = (() => {
         enterTask,
         saveAddProject,
         loadAddProject,
+        refreshHome,
     }
 })();
 
@@ -289,23 +323,34 @@ const dom = (() => {
 
 const listener = (() => {
 
-    const maincontent = () => {
+    const mainContent = () => {
         content.addEventListener("click", (e) => {
-            
+
             if (e.target.id === "plus" || e.target.id === "addProject") {
                 console.log(e.target.id);
                 dom.enterProject();
-                listener.enterProject();
             }
 
-            if (e.target.className === "project" || e.target.className === "title" ) { //|| e.target.parentNode.parentNode.className === "project"  
+            if (e.target.className === "project" || e.target.className === "title") { //|| e.target.parentNode.parentNode.className === "project"  
                 console.log(e.target.id);
                 console.log(e.target.parentNode.id);
                 dom.loadProjectView(e.target.id);
             }
 
+            //delete button - works for project view too
+            if (e.target.className === "delBTN") {
+                console.log("delete button fired");
+                projects.del(e.target.id);
+                dom.del();
+                dom.loadAddProject();
+                dom.loadHome();
+                canAddTask = true;
+                data.save();
 
-        },)
+            }
+
+
+        })
     }
 
     const navbar = () => {
@@ -320,7 +365,7 @@ const listener = (() => {
             }
             if (e.target.id === "reset") {
                 console.log("reset");
-                projects.setProjectArr([]);   
+                projects.setProjectArr([]);
                 dom.del();
                 dom.loadAddProject();
                 dom.loadHome();
@@ -371,16 +416,10 @@ const listener = (() => {
                 } else {
                     console.log("both must be entered");
                     // .setAttribute("class", "highlight");
-                    
+
                 }
             }
 
-            //delete button
-            if (e.target.id === "delBTN") {
-                console.log("project view delete button fired")
-
-            }
-            
             //close button
             if (e.target.id === "closeBTN") {
                 console.log("close project button fired");
@@ -390,18 +429,41 @@ const listener = (() => {
                 canAddTask = true;
             };
 
-            
+            //checkbox 
+            if (e.target.className === "complete") {
+                let taskUUID = e.target.parentNode.id;
+                let projectUUID = e.target.parentNode.parentNode.id;
+                projects.toggleCompTask(projectUUID, taskUUID);
+            }
+
+            //click on date snoozes by day
+            if (e.target.className === "due") {
+                let taskUUID = e.target.parentNode.id;
+                let projectUUID = e.target.parentNode.parentNode.id;
+                projects.snooze(projectUUID, taskUUID);
+                dom.refreshHome();
+
+            }
+        
+
         })
+    }
+
+    const all = () => {
+        mainContent();
+        enterProject();
+        navbar();
+        projectView();
     }
 
 
 
-
     return {
-        maincontent,
+        mainContent,
         enterProject,
         navbar,
         projectView,
+        all,
     }
 })();
 
@@ -440,12 +502,11 @@ const data = (() => {
     createDummys();
     dom.loadHome();
     dom.saveAddProject();
-    listener.maincontent();
-    listener.navbar();
+    listener.all()
 })();
 
 function createDummys() {
-    
+
 }
 
 
