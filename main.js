@@ -3554,12 +3554,14 @@ const projects = (() => {
     const setProjectArr = (arr) => {
         projectArr = arr;
         data.save()
+        dom.tracker();
     }
 
     const create = (name) => {
         let project = new Project(name);
         projectArr.push(project);
         data.save();
+        dom.tracker();
     }
 
     const find = (projectUUID) => {
@@ -3579,6 +3581,7 @@ const projects = (() => {
         let array = project.tasks;
         array.push(task);
         data.save();
+        dom.tracker();
     }
 
 
@@ -3594,14 +3597,32 @@ const projects = (() => {
         task.complete = task.complete ? task.complete = false : task.complete = true;  
         console.log(task);
         data.save();
+        dom.tracker();
     }
 
     const snooze = (projectUUID, taskUUID) => {
         let task = findTask(projectUUID, taskUUID);
-        task.due = (0,date_fns__WEBPACK_IMPORTED_MODULE_0__.default)((0,date_fns__WEBPACK_IMPORTED_MODULE_3__.default)(task.due), 1);
-        console.log(task.due);
+        console.log(task);
+        let nextDay = (0,date_fns__WEBPACK_IMPORTED_MODULE_0__.default)((0,date_fns__WEBPACK_IMPORTED_MODULE_3__.default)(task.due), 1);
+        task.due = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__.default)(nextDay, "yyyy-MM-dd")
         data.save();
+        dom.tracker();
 
+    }
+
+    const returnCompTasks = () => {
+        let totalTasks = 0;
+        let completedTasks = 0;
+        projectArr.forEach(obj => {
+            let tasks = obj.tasks;
+            totalTasks += tasks.length;
+            console.log(tasks.length);
+            tasks.forEach(obj => {
+                if (obj.complete === true) completedTasks += 1;
+            });
+        });
+        
+        return completedTasks + " / " + totalTasks;
     }
 
 
@@ -3615,6 +3636,7 @@ const projects = (() => {
         createTask,
         toggleCompTask,
         snooze,
+        returnCompTasks,
     }
 })();
 
@@ -3668,9 +3690,9 @@ const dom = (() => {
                 complete.setAttribute("type", "checkbox")
                 if (taskObj[key] === true) {
                     complete.setAttribute("checked", "checked")
-                    console.log("checked")
                 }
                 task.appendChild(complete);
+                task.setAttribute("class", "strikethrough")
                 continue;
             }
         
@@ -3791,6 +3813,11 @@ const dom = (() => {
         loadHome();
     }
 
+    const tracker = () => {
+        let tracker = document.getElementById("tracker");
+        tracker.textContent = projects.returnCompTasks();
+    }
+
     return {
         del,
         loadProjectView,
@@ -3801,6 +3828,7 @@ const dom = (() => {
         saveAddProject,
         loadAddProject,
         refreshHome,
+        tracker,
     }
 })();
 
@@ -3826,11 +3854,10 @@ const listener = (() => {
             if (e.target.className === "delBTN") {
                 console.log("delete button fired");
                 projects.del(e.target.id);
-                dom.del();
-                dom.loadAddProject();
-                dom.loadHome();
+                dom.refreshHome();
                 canAddTask = true;
                 data.save();
+                dom.tracker();
 
             }
 
@@ -3843,17 +3870,13 @@ const listener = (() => {
         nav.addEventListener("click", (e) => {
             if (e.target.id === "title") {
                 console.log("navbar listener firing");
-                dom.del();
-                dom.loadAddProject();
-                dom.loadHome();
+                dom.refreshHome();
                 canAddTask = true;
             }
             if (e.target.id === "reset") {
                 console.log("reset");
                 projects.setProjectArr([]);
-                dom.del();
-                dom.loadAddProject();
-                dom.loadHome();
+                dom.refreshHome();
                 canAddTask = true;
             }
         })
@@ -3908,9 +3931,7 @@ const listener = (() => {
             //close button
             if (e.target.id === "closeBTN") {
                 console.log("close project button fired");
-                dom.del();
-                dom.loadAddProject();
-                dom.loadHome();
+                dom.refreshHome();
                 canAddTask = true;
             };
 
@@ -3984,15 +4005,13 @@ const data = (() => {
 
 (function init() {
     data.load();
-    createDummys();
+    // dom.tracker();
     dom.loadHome();
     dom.saveAddProject();
     listener.all()
 })();
 
-function createDummys() {
 
-}
 
 
 
