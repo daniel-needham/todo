@@ -2847,6 +2847,312 @@ var locale = {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/esm/parseISO/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/esm/parseISO/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ parseISO)
+/* harmony export */ });
+/* harmony import */ var _lib_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../_lib/toInteger/index.js */ "./node_modules/date-fns/esm/_lib/toInteger/index.js");
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+
+var MILLISECONDS_IN_HOUR = 3600000;
+var MILLISECONDS_IN_MINUTE = 60000;
+var DEFAULT_ADDITIONAL_DIGITS = 2;
+var patterns = {
+  dateTimeDelimiter: /[T ]/,
+  timeZoneDelimiter: /[Z ]/i,
+  timezone: /([Z+-].*)$/
+};
+var dateRegex = /^-?(?:(\d{3})|(\d{2})(?:-?(\d{2}))?|W(\d{2})(?:-?(\d{1}))?|)$/;
+var timeRegex = /^(\d{2}(?:[.,]\d*)?)(?::?(\d{2}(?:[.,]\d*)?))?(?::?(\d{2}(?:[.,]\d*)?))?$/;
+var timezoneRegex = /^([+-])(\d{2})(?::?(\d{2}))?$/;
+/**
+ * @name parseISO
+ * @category Common Helpers
+ * @summary Parse ISO string
+ *
+ * @description
+ * Parse the given string in ISO 8601 format and return an instance of Date.
+ *
+ * Function accepts complete ISO 8601 formats as well as partial implementations.
+ * ISO 8601: http://en.wikipedia.org/wiki/ISO_8601
+ *
+ * If the argument isn't a string, the function cannot parse the string or
+ * the values are invalid, it returns Invalid Date.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * - The previous `parse` implementation was renamed to `parseISO`.
+ *
+ *   ```javascript
+ *   // Before v2.0.0
+ *   parse('2016-01-01')
+ *
+ *   // v2.0.0 onward
+ *   parseISO('2016-01-01')
+ *   ```
+ *
+ * - `parseISO` now validates separate date and time values in ISO-8601 strings
+ *   and returns `Invalid Date` if the date is invalid.
+ *
+ *   ```javascript
+ *   parseISO('2018-13-32')
+ *   //=> Invalid Date
+ *   ```
+ *
+ * - `parseISO` now doesn't fall back to `new Date` constructor
+ *   if it fails to parse a string argument. Instead, it returns `Invalid Date`.
+ *
+ * @param {String} argument - the value to convert
+ * @param {Object} [options] - an object with options.
+ * @param {0|1|2} [options.additionalDigits=2] - the additional number of digits in the extended year format
+ * @returns {Date} the parsed date in the local time zone
+ * @throws {TypeError} 1 argument required
+ * @throws {RangeError} `options.additionalDigits` must be 0, 1 or 2
+ *
+ * @example
+ * // Convert string '2014-02-11T11:30:30' to date:
+ * var result = parseISO('2014-02-11T11:30:30')
+ * //=> Tue Feb 11 2014 11:30:30
+ *
+ * @example
+ * // Convert string '+02014101' to date,
+ * // if the additional number of digits in the extended year format is 1:
+ * var result = parseISO('+02014101', { additionalDigits: 1 })
+ * //=> Fri Apr 11 2014 00:00:00
+ */
+
+function parseISO(argument, dirtyOptions) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__.default)(1, arguments);
+  var options = dirtyOptions || {};
+  var additionalDigits = options.additionalDigits == null ? DEFAULT_ADDITIONAL_DIGITS : (0,_lib_toInteger_index_js__WEBPACK_IMPORTED_MODULE_1__.default)(options.additionalDigits);
+
+  if (additionalDigits !== 2 && additionalDigits !== 1 && additionalDigits !== 0) {
+    throw new RangeError('additionalDigits must be 0, 1 or 2');
+  }
+
+  if (!(typeof argument === 'string' || Object.prototype.toString.call(argument) === '[object String]')) {
+    return new Date(NaN);
+  }
+
+  var dateStrings = splitDateString(argument);
+  var date;
+
+  if (dateStrings.date) {
+    var parseYearResult = parseYear(dateStrings.date, additionalDigits);
+    date = parseDate(parseYearResult.restDateString, parseYearResult.year);
+  }
+
+  if (isNaN(date) || !date) {
+    return new Date(NaN);
+  }
+
+  var timestamp = date.getTime();
+  var time = 0;
+  var offset;
+
+  if (dateStrings.time) {
+    time = parseTime(dateStrings.time);
+
+    if (isNaN(time) || time === null) {
+      return new Date(NaN);
+    }
+  }
+
+  if (dateStrings.timezone) {
+    offset = parseTimezone(dateStrings.timezone);
+
+    if (isNaN(offset)) {
+      return new Date(NaN);
+    }
+  } else {
+    var dirtyDate = new Date(timestamp + time); // js parsed string assuming it's in UTC timezone
+    // but we need it to be parsed in our timezone
+    // so we use utc values to build date in our timezone.
+    // Year values from 0 to 99 map to the years 1900 to 1999
+    // so set year explicitly with setFullYear.
+
+    var result = new Date(0);
+    result.setFullYear(dirtyDate.getUTCFullYear(), dirtyDate.getUTCMonth(), dirtyDate.getUTCDate());
+    result.setHours(dirtyDate.getUTCHours(), dirtyDate.getUTCMinutes(), dirtyDate.getUTCSeconds(), dirtyDate.getUTCMilliseconds());
+    return result;
+  }
+
+  return new Date(timestamp + time + offset);
+}
+
+function splitDateString(dateString) {
+  var dateStrings = {};
+  var array = dateString.split(patterns.dateTimeDelimiter);
+  var timeString; // The regex match should only return at maximum two array elements.
+  // [date], [time], or [date, time].
+
+  if (array.length > 2) {
+    return dateStrings;
+  }
+
+  if (/:/.test(array[0])) {
+    dateStrings.date = null;
+    timeString = array[0];
+  } else {
+    dateStrings.date = array[0];
+    timeString = array[1];
+
+    if (patterns.timeZoneDelimiter.test(dateStrings.date)) {
+      dateStrings.date = dateString.split(patterns.timeZoneDelimiter)[0];
+      timeString = dateString.substr(dateStrings.date.length, dateString.length);
+    }
+  }
+
+  if (timeString) {
+    var token = patterns.timezone.exec(timeString);
+
+    if (token) {
+      dateStrings.time = timeString.replace(token[1], '');
+      dateStrings.timezone = token[1];
+    } else {
+      dateStrings.time = timeString;
+    }
+  }
+
+  return dateStrings;
+}
+
+function parseYear(dateString, additionalDigits) {
+  var regex = new RegExp('^(?:(\\d{4}|[+-]\\d{' + (4 + additionalDigits) + '})|(\\d{2}|[+-]\\d{' + (2 + additionalDigits) + '})$)');
+  var captures = dateString.match(regex); // Invalid ISO-formatted year
+
+  if (!captures) return {
+    year: null
+  };
+  var year = captures[1] && parseInt(captures[1]);
+  var century = captures[2] && parseInt(captures[2]);
+  return {
+    year: century == null ? year : century * 100,
+    restDateString: dateString.slice((captures[1] || captures[2]).length)
+  };
+}
+
+function parseDate(dateString, year) {
+  // Invalid ISO-formatted year
+  if (year === null) return null;
+  var captures = dateString.match(dateRegex); // Invalid ISO-formatted string
+
+  if (!captures) return null;
+  var isWeekDate = !!captures[4];
+  var dayOfYear = parseDateUnit(captures[1]);
+  var month = parseDateUnit(captures[2]) - 1;
+  var day = parseDateUnit(captures[3]);
+  var week = parseDateUnit(captures[4]);
+  var dayOfWeek = parseDateUnit(captures[5]) - 1;
+
+  if (isWeekDate) {
+    if (!validateWeekDate(year, week, dayOfWeek)) {
+      return new Date(NaN);
+    }
+
+    return dayOfISOWeekYear(year, week, dayOfWeek);
+  } else {
+    var date = new Date(0);
+
+    if (!validateDate(year, month, day) || !validateDayOfYearDate(year, dayOfYear)) {
+      return new Date(NaN);
+    }
+
+    date.setUTCFullYear(year, month, Math.max(dayOfYear, day));
+    return date;
+  }
+}
+
+function parseDateUnit(value) {
+  return value ? parseInt(value) : 1;
+}
+
+function parseTime(timeString) {
+  var captures = timeString.match(timeRegex);
+  if (!captures) return null; // Invalid ISO-formatted time
+
+  var hours = parseTimeUnit(captures[1]);
+  var minutes = parseTimeUnit(captures[2]);
+  var seconds = parseTimeUnit(captures[3]);
+
+  if (!validateTime(hours, minutes, seconds)) {
+    return NaN;
+  }
+
+  return hours * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE + seconds * 1000;
+}
+
+function parseTimeUnit(value) {
+  return value && parseFloat(value.replace(',', '.')) || 0;
+}
+
+function parseTimezone(timezoneString) {
+  if (timezoneString === 'Z') return 0;
+  var captures = timezoneString.match(timezoneRegex);
+  if (!captures) return 0;
+  var sign = captures[1] === '+' ? -1 : 1;
+  var hours = parseInt(captures[2]);
+  var minutes = captures[3] && parseInt(captures[3]) || 0;
+
+  if (!validateTimezone(hours, minutes)) {
+    return NaN;
+  }
+
+  return sign * (hours * MILLISECONDS_IN_HOUR + minutes * MILLISECONDS_IN_MINUTE);
+}
+
+function dayOfISOWeekYear(isoWeekYear, week, day) {
+  var date = new Date(0);
+  date.setUTCFullYear(isoWeekYear, 0, 4);
+  var fourthOfJanuaryDay = date.getUTCDay() || 7;
+  var diff = (week - 1) * 7 + day + 1 - fourthOfJanuaryDay;
+  date.setUTCDate(date.getUTCDate() + diff);
+  return date;
+} // Validation functions
+// February is null to handle the leap year (using ||)
+
+
+var daysInMonths = [31, null, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+function isLeapYearIndex(year) {
+  return year % 400 === 0 || year % 4 === 0 && year % 100;
+}
+
+function validateDate(year, month, date) {
+  return month >= 0 && month <= 11 && date >= 1 && date <= (daysInMonths[month] || (isLeapYearIndex(year) ? 29 : 28));
+}
+
+function validateDayOfYearDate(year, dayOfYear) {
+  return dayOfYear >= 1 && dayOfYear <= (isLeapYearIndex(year) ? 366 : 365);
+}
+
+function validateWeekDate(_year, week, day) {
+  return week >= 1 && week <= 53 && day >= 0 && day <= 6;
+}
+
+function validateTime(hours, minutes, seconds) {
+  if (hours === 24) {
+    return minutes === 0 && seconds === 0;
+  }
+
+  return seconds >= 0 && seconds < 60 && minutes >= 0 && minutes < 60 && hours >= 0 && hours < 25;
+}
+
+function validateTimezone(_hours, minutes) {
+  return minutes >= 0 && minutes <= 59;
+}
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/esm/subMilliseconds/index.js":
 /*!************************************************************!*\
   !*** ./node_modules/date-fns/esm/subMilliseconds/index.js ***!
@@ -3174,8 +3480,9 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/addDays/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
-/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/parseISO/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/v4.js");
 
 
 
@@ -3185,12 +3492,15 @@ let recentProjectUUID = "";
 
 const today = new Date();
 const tomorrow = (0,date_fns__WEBPACK_IMPORTED_MODULE_0__.default)(today, 1);
+console.log(tomorrow);
+let tmrw = (0,date_fns__WEBPACK_IMPORTED_MODULE_1__.default)(tomorrow, "yyyy-MM-dd");
+console.log(tmrw);
 
 class Project {
     constructor(name) {
         this.name = name;
         this.tasks = [];
-        this.id = (0,uuid__WEBPACK_IMPORTED_MODULE_1__.default)();
+        this.id = (0,uuid__WEBPACK_IMPORTED_MODULE_2__.default)();
 
         this.storeId = function () {
             let id = this.id;
@@ -3226,7 +3536,7 @@ class Task {
     constructor(desc, due) {
         this.desc = desc;
         this.due = due;
-        this.id = (0,uuid__WEBPACK_IMPORTED_MODULE_1__.default)();
+        this.id = (0,uuid__WEBPACK_IMPORTED_MODULE_2__.default)();
         this.complete = false;
     }
 }
@@ -3271,7 +3581,30 @@ const projects = (() => {
         data.save();
     }
 
-    
+
+    const findTask = (projectUUID, taskUUID) => {
+        let project = projectArr.find(obj => obj.id === projectUUID);
+        let tasksArr = project.tasks;
+        let task = tasksArr.find(obj => obj.id === taskUUID);
+        return task;
+
+    }
+    const toggleCompTask = (projectUUID, taskUUID) => {
+        let task = findTask(projectUUID, taskUUID);
+        task.complete = task.complete ? task.complete = false : task.complete = true;  
+        console.log(task);
+        data.save();
+    }
+
+    const snooze = (projectUUID, taskUUID) => {
+        let task = findTask(projectUUID, taskUUID);
+        task.due = (0,date_fns__WEBPACK_IMPORTED_MODULE_0__.default)((0,date_fns__WEBPACK_IMPORTED_MODULE_3__.default)(task.due), 1);
+        console.log(task.due);
+        data.save();
+
+    }
+
+
 
     return {
         getProjectArr,
@@ -3280,6 +3613,8 @@ const projects = (() => {
         del,
         setProjectArr,
         createTask,
+        toggleCompTask,
+        snooze,
     }
 })();
 
@@ -3321,7 +3656,8 @@ const dom = (() => {
             }
             if (key === "due") {
                 let date = document.createElement("p");
-                date.textContent = `${taskObj[key]}`;
+                let unformattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.default)(taskObj[key]);
+                date.textContent = `${(0,date_fns__WEBPACK_IMPORTED_MODULE_1__.default)(unformattedDate, "dd/MM/yyyy")}`;
                 date.setAttribute("class", "due");
                 task.appendChild(date);
                 continue;
@@ -3337,6 +3673,7 @@ const dom = (() => {
                 task.appendChild(complete);
                 continue;
             }
+        
         }
         return task;
     }
@@ -3345,14 +3682,13 @@ const dom = (() => {
     const createNote = (project) => {
         let notepad = document.createElement("div");
         notepad.setAttribute("class", "project");
-        let delBTN = document.createElement("button");  
-        delBTN.setAttribute("id", "delBTN");
+        let delBTN = document.createElement("button");
+        delBTN.setAttribute("class", "delBTN");
         notepad.appendChild(delBTN);
         let title = document.createElement("h2"); //create title so i can add uuid to id
         for (let key in project) {
 
             if (key === "name") {
-                
                 title.textContent = `${project[key]}`;
                 title.setAttribute("class", "title");
                 notepad.appendChild(title);
@@ -3361,9 +3697,10 @@ const dom = (() => {
             if (key === "id") {
                 notepad.setAttribute("id", project[key]);
                 title.setAttribute("id", project[key]);
+                delBTN.setAttribute("id", project[key]);
                 continue;
             }
-            
+
             if (key === "tasks") {
                 let arr = project[key];
                 arr.forEach(taskObj => {
@@ -3403,12 +3740,9 @@ const dom = (() => {
         let closeBTN = document.createElement("button");
         closeBTN.setAttribute("id", "closeBTN");
         projectView.appendChild(closeBTN);
-        
+
         //pushes projectUUID to a var so tasks can be added
         recentProjectUUID = projectUUID;
-
-        //triggers event listener for this view
-        listener.projectView();
 
 
     }
@@ -3427,7 +3761,7 @@ const dom = (() => {
         due.setAttribute("type", "date");
         due.setAttribute("id", "due");
         due.setAttribute("class", "due");
-        let tmrw = (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.default)(tomorrow, "yyyy-mm-dd");
+        
         due.setAttribute("value", tmrw);
 
         const enterBTN = document.createElement("button");
@@ -3439,7 +3773,7 @@ const dom = (() => {
 
         let firstChild = project.firstChild;
         firstChild.before(holder);
-       
+
 
     }
 
@@ -3451,6 +3785,12 @@ const dom = (() => {
         content.appendChild(newProjectNote);
     }
 
+    const refreshHome = () => {
+        del();
+        loadAddProject();
+        loadHome();
+    }
+
     return {
         del,
         loadProjectView,
@@ -3460,6 +3800,7 @@ const dom = (() => {
         enterTask,
         saveAddProject,
         loadAddProject,
+        refreshHome,
     }
 })();
 
@@ -3467,23 +3808,34 @@ const dom = (() => {
 
 const listener = (() => {
 
-    const maincontent = () => {
+    const mainContent = () => {
         content.addEventListener("click", (e) => {
-            
+
             if (e.target.id === "plus" || e.target.id === "addProject") {
                 console.log(e.target.id);
                 dom.enterProject();
-                listener.enterProject();
             }
 
-            if (e.target.className === "project" || e.target.className === "title" ) { //|| e.target.parentNode.parentNode.className === "project"  
+            if (e.target.className === "project" || e.target.className === "title") { //|| e.target.parentNode.parentNode.className === "project"  
                 console.log(e.target.id);
                 console.log(e.target.parentNode.id);
                 dom.loadProjectView(e.target.id);
             }
 
+            //delete button - works for project view too
+            if (e.target.className === "delBTN") {
+                console.log("delete button fired");
+                projects.del(e.target.id);
+                dom.del();
+                dom.loadAddProject();
+                dom.loadHome();
+                canAddTask = true;
+                data.save();
 
-        },)
+            }
+
+
+        })
     }
 
     const navbar = () => {
@@ -3498,7 +3850,7 @@ const listener = (() => {
             }
             if (e.target.id === "reset") {
                 console.log("reset");
-                projects.setProjectArr([]);   
+                projects.setProjectArr([]);
                 dom.del();
                 dom.loadAddProject();
                 dom.loadHome();
@@ -3549,16 +3901,10 @@ const listener = (() => {
                 } else {
                     console.log("both must be entered");
                     // .setAttribute("class", "highlight");
-                    
+
                 }
             }
 
-            //delete button
-            if (e.target.id === "delBTN") {
-                console.log("project view delete button fired")
-
-            }
-            
             //close button
             if (e.target.id === "closeBTN") {
                 console.log("close project button fired");
@@ -3568,18 +3914,41 @@ const listener = (() => {
                 canAddTask = true;
             };
 
-            
+            //checkbox 
+            if (e.target.className === "complete") {
+                let taskUUID = e.target.parentNode.id;
+                let projectUUID = e.target.parentNode.parentNode.id;
+                projects.toggleCompTask(projectUUID, taskUUID);
+            }
+
+            //click on date snoozes by day
+            if (e.target.className === "due") {
+                let taskUUID = e.target.parentNode.id;
+                let projectUUID = e.target.parentNode.parentNode.id;
+                projects.snooze(projectUUID, taskUUID);
+                dom.refreshHome();
+
+            }
+        
+
         })
+    }
+
+    const all = () => {
+        mainContent();
+        enterProject();
+        navbar();
+        projectView();
     }
 
 
 
-
     return {
-        maincontent,
+        mainContent,
         enterProject,
         navbar,
         projectView,
+        all,
     }
 })();
 
@@ -3618,12 +3987,11 @@ const data = (() => {
     createDummys();
     dom.loadHome();
     dom.saveAddProject();
-    listener.maincontent();
-    listener.navbar();
+    listener.all()
 })();
 
 function createDummys() {
-    
+
 }
 
 

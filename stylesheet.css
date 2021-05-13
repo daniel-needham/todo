@@ -195,7 +195,7 @@ nav li {
     
 }
 
-.project #delBTN {
+.project .delBTN {
     width: 20px;
     height: 20px;
     background: url("/images/delBTN.png") no-repeat top left;
@@ -253,7 +253,7 @@ nav li {
     background-size: 28px 28px;
 }
 
-.projectView #delBTN {
+.projectView .delBTN {
     width: 30px;
     height: 30px;
     grid-area: 1/1/2/1;
