@@ -3681,7 +3681,7 @@ const dom = (() => {
                 let date = document.createElement("p");
                 let unformattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__.default)(taskObj[key]);
                 date.textContent = `${(0,date_fns__WEBPACK_IMPORTED_MODULE_1__.default)(unformattedDate, "dd/MM/yyyy")}`;
-                date.setAttribute("class", "due");
+                date.setAttribute("class", "due hvr-forward");
                 task.appendChild(date);
                 continue;
             }
@@ -3948,7 +3948,7 @@ const listener = (() => {
             }
 
             //click on date snoozes by day
-            if (e.target.className === "due") {
+            if (e.target.className === "due hvr-forward") {
                 let taskUUID = e.target.parentNode.id;
                 let projectUUID = e.target.parentNode.parentNode.id;
                 projects.snooze(projectUUID, taskUUID);
