@@ -196,7 +196,7 @@ const dom = (() => {
                 let date = document.createElement("p");
                 let unformattedDate = parseISO(taskObj[key]);
                 date.textContent = `${format(unformattedDate, "dd/MM/yyyy")}`;
-                date.setAttribute("class", "due");
+                date.setAttribute("class", "due hvr-forward");
                 task.appendChild(date);
                 continue;
             }
@@ -463,7 +463,7 @@ const listener = (() => {
             }
 
             //click on date snoozes by day
-            if (e.target.className === "due") {
+            if (e.target.className === "due hvr-forward") {
                 let taskUUID = e.target.parentNode.id;
                 let projectUUID = e.target.parentNode.parentNode.id;
                 projects.snooze(projectUUID, taskUUID);
