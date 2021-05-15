@@ -222,7 +222,7 @@ nav li {
 .project .delBTN {
     width: 20px;
     height: 20px;
-    background: url("/images/delBTN.png") no-repeat top left;
+    background: url("images/delBTN.png") no-repeat top left;
     background-size: contain;
     border: none;
     cursor: pointer;
@@ -305,7 +305,7 @@ nav li {
 }
 
 .projectView #enterBTN {
-    background: url("/images/enterBTN.png") no-repeat top left;
+    background: url("images/enterBTN.png") no-repeat top left;
     background-size: contain;
     border: none;
     cursor: pointer;
@@ -340,7 +340,7 @@ nav li {
     grid-area: 1/1/2/1;
     justify-self: flex-end;
     margin: 15px;
-    background: url("/images/closeBTN.png") no-repeat top left;
+    background: url("images/closeBTN.png") no-repeat top left;
     background-size: contain;
     border: none;
     cursor: pointer;
@@ -353,7 +353,7 @@ nav li {
     justify-self: flex-end;
     margin-right: 50px;
     margin-top: 15px;
-    background: url("/images/addBTN.png") no-repeat top left;
+    background: url("images/addBTN.png") no-repeat top left;
     background-size: contain;
     border: none;
     cursor: pointer;
@@ -367,7 +367,7 @@ nav li {
     justify-self: flex-end;
     margin-right: 85px;
     margin-top: 15px;
-    background: url("/images/delBTN.png") no-repeat top left;
+    background: url("images/delBTN.png") no-repeat top left;
     background-size: contain;
     border: none;
     cursor: pointer;
