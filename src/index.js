@@ -74,7 +74,7 @@ const projects = (() => {
 
     const create = (name) => {
         let project = new Project(name);
-        projectArr.push(project);
+        projectArr.unshift(project);
         data.save();
         dom.tracker();
     }
@@ -94,7 +94,7 @@ const projects = (() => {
         let project = projectArr.find(obj => obj.id === projectUUID); //find project
         let task = new Task(desc, due);
         let array = project.tasks;
-        array.push(task);
+        array.unshift(task);
         data.save();
         dom.tracker();
     }
@@ -109,7 +109,7 @@ const projects = (() => {
     }
     const toggleCompTask = (projectUUID, taskUUID) => {
         let task = findTask(projectUUID, taskUUID);
-        task.complete = task.complete ? task.complete = false : task.complete = true;  
+        task.complete = task.complete ? task.complete = false : task.complete = true;
         console.log(task);
         data.save();
         dom.tracker();
@@ -136,8 +136,9 @@ const projects = (() => {
                 if (obj.complete === true) completedTasks += 1;
             });
         });
-        
-        return completedTasks + " / " + totalTasks;
+
+        return `${completedTasks} / ${totalTasks} completed`
+        // return completedTasks + " / " + totalTasks + " completed";
     }
 
 
@@ -205,12 +206,13 @@ const dom = (() => {
                 complete.setAttribute("type", "checkbox")
                 if (taskObj[key] === true) {
                     complete.setAttribute("checked", "checked")
+                    task.setAttribute("class", "task strikethrough");
                 }
                 task.appendChild(complete);
-                task.setAttribute("class", "strikethrough")
+
                 continue;
             }
-        
+
         }
         return task;
     }
@@ -258,6 +260,8 @@ const dom = (() => {
         input.setAttribute("id", "projectInput");
         let projectSubmitBTN = document.createElement("button");
         projectSubmitBTN.setAttribute("id", "projectSubmitBTN");
+        projectSubmitBTN.setAttribute("class", "hvr-forward");
+        projectSubmitBTN.textContent = "create"
         content.appendChild(input);
         content.appendChild(projectSubmitBTN);
 
@@ -289,6 +293,7 @@ const dom = (() => {
         console.log("project enter fired");
         let project = document.getElementById(recentProjectUUID);
         const holder = document.createElement("div");
+        holder.setAttribute("class", "task")
 
         const desc = document.createElement("input");
         desc.setAttribute("type", "text");
@@ -298,7 +303,7 @@ const dom = (() => {
         due.setAttribute("type", "date");
         due.setAttribute("id", "due");
         due.setAttribute("class", "due");
-        
+
         due.setAttribute("value", tmrw);
 
         const enterBTN = document.createElement("button");
@@ -465,7 +470,7 @@ const listener = (() => {
                 dom.refreshHome();
 
             }
-        
+
 
         })
     }
@@ -506,6 +511,8 @@ const data = (() => {
         if (JSON.parse(window.localStorage.getItem("projectArr"))) {
             let arr = JSON.parse(window.localStorage.getItem("projectArr"));
             projects.setProjectArr(arr);
+        } else {
+            projects.create("Add tasks to me!");
         }
     }
 
@@ -520,10 +527,9 @@ const data = (() => {
 
 (function init() {
     data.load();
-    // dom.tracker();
     dom.loadHome();
     dom.saveAddProject();
-    listener.all()
+    listener.all();
 })();
 
 
